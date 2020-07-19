@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script src="https://unpkg.com/vhtml@2.2.0/dist/vhtml.js"></script>
+    <script type="module">
+      console.log("hello2");
+      import ezForm from "./index.js";
+      const h = window.vhtml;
+      const { Field, Form, parseFormInputs, fromExtraTerse } = ezForm(h);
+      const f = Form({
+        onSubmit: (inputs) => console.log({ inputs }),
+        children: [
+          { ezTitle: "Text input with value", value: "text value" },
+          { ezTitle: "Textarea", rows: 5, value: "this is value data" },
+          {
+            ezTitle: "Checkboxes",
+            children: [{ label: "Apple", checked: true }, { label: "Pear" }],
+          },
+          {
+            ezTitle: "Radios",
+            type: "radio",
+            children: [{ label: "Apple", checked: true }, { label: "Pear" }],
+          },
+          {
+            type: "select",
+            name: "Select fruit",
+            children: [
+              { label: "Apple", value: "apple" },
+              "Pear",
+              "Passion fruit",
+            ],
+          },
+        ]
+          .map(fromExtraTerse)
+          .map((f) => Field(f)),
+      });
+      //document.body.innerHTML = f;
+      document.getElementById("vhtml").innerHTML = f;
+    </script>
+    <script type="module">
+      import { React, ReactDOM, PropTypes } from "https://unpkg.com/es-react";
+      import ezForm from "./index.js";
+      const h = React.createElement;
+      const { Field, Form, parseFormInputs, fromExtraTerse } = ezForm(h, {
+        idPrefix: "r-",
+      });
+      let f;
+      f = Form({
+        onSubmit: (inputs) => console.log(JSON.stringify({ inputs }, null, 2)),
+        children: [
+          { ezTitle: "Text input with value", value: "text value" },
+          { placeholder: "Textarea", rows: 5 },
+          {
+            ezTitle: "Checkboxes",
+            children: [{ label: "Apple", checked: true }, { label: "Pear" }],
+          },
+          {
+            ezTitle: "Radios",
+            type: "radio",
+            children: [{ label: "Apple", checked: true }, { label: "Pear" }],
+          },
+          {
+            type: "select",
+            ezTitle: "Select fruit",
+            multiple: true,
+            children: [
+              { label: "Apple", value: "apple" },
+              "Pear",
+              "Passion fruit",
+            ],
+          },
+        ]
+          .map(fromExtraTerse)
+          .map((f, i) => Field({ ...f, key: i })),
+      });
+      //f = h("label", {}, "a label");
+      //console.log(JSON.stringify(f, null, 2));
+      ReactDOM.render(f, document.getElementById("react"));
+    </script>
+  </head>
+  <body>
+    <div id="vhtml">vhtml</div>
+    <div id="react">react</div>
+    <script>
+      console.log("hello1");
+    </script>
+  </body>
+</html>

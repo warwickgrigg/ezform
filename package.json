@@ -1,0 +1,39 @@
+{
+  "name": "ezform",
+  "version": "0.1.0",
+  "description": "easy form",
+  "main": "index.js",
+  "files": [
+    "/index.js"
+  ],
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "demo": "cp index.js public/; serve public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/warwickgrigg/ezform.git"
+  },
+  "keywords": [
+    "form",
+    "vdom"
+  ],
+  "author": "Warwick Grigg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/warwickgrigg/ezform/issues"
+  },
+  "homepage": "https://github.com/warwickgrigg/ezform#readme",
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
+    "@babel/preset-react": "^7.10.1",
+    "eslint": "^6.8.0",
+    "lodash": ">=4.17.19",
+    "jest": "^26.1.0",
+    "serve": "^11.3.2",
+    "vhtml": "^2.2.0"
+  },
+  "dependencies": {}
+}
