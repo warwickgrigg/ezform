@@ -9,7 +9,33 @@
       crossorigin="anonymous"
     />
     <script src="https://unpkg.com/vhtml@2.2.0/dist/vhtml.js"></script>
-    <script type="module">
+
+    <script
+      defer
+      src="https://unpkg.com/es-module-shims@0.5.2/dist/es-module-shims.js"
+    ></script>
+    <script type="importmap-shim">
+      {
+        "imports": {
+          "react": "https://unpkg.com/es-react/dev/react.js",
+          "react-dom": "https://unpkg.com/es-react/dev/react-dom.js"
+        }
+      }
+    </script>
+
+    <!--
+    <script type="importmap-shim">
+      {
+        "imports": {
+          "preact": "https://unpkg.com/preact/dist/preact.module.js",
+          "preact/hooks": "https://unpkg.com/preact/hooks/dist/hooks.module.js",
+          "react": "https://unpkg.com/preact/compat/dist/compat.module.js",
+          "react-dom": "https://unpkg.com/preact/compat/dist/compat.module.js"
+        }
+      }
+    </script>
+    -->
+    <script type="module-shim">
       console.log("hello2");
       import ezForm from "./index.js";
       const h = window.vhtml;
@@ -44,8 +70,10 @@
       //document.body.innerHTML = f;
       document.getElementById("vhtml").innerHTML = f;
     </script>
-    <script type="module">
-      import { React, ReactDOM, PropTypes } from "https://unpkg.com/es-react";
+    <script type="module-shim">
+      //import { React, ReactDOM, PropTypes } from "https://unpkg.com/es-react";
+      import React from "react";
+      import ReactDOM from "react-dom";
       import ezForm from "./index.js";
       const h = React.createElement;
       const { Field, Form, parseFormInputs, fromExtraTerse } = ezForm(h, {
