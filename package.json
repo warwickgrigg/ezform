@@ -2,11 +2,11 @@
   "name": "ezform",
   "version": "0.1.1",
   "description": "easy form",
-  "source": "index.js",
-  "main": "dist/index.js",
-  "module": "dist/index.module.js",
-  "umd:main": "dist/index.umd.js",
-  "esmodule": "dist/index.modern.js",
+  "source": "src/ezform.js",
+  "main": "dist/ezform.js",
+  "module": "dist/ezform.module.js",
+  "umd:main": "dist/ezform.umd.js",
+  "esmodule": "dist/ezform.modern.js",
   "files": [
     "dist/"
   ],
@@ -16,7 +16,7 @@
     "dev": "microbundle --css-modules false watch",
     "test": "jest",
     "coverage": "jest --coverage",
-    "demo": "cp index.js public/; serve public"
+    "start": "serve src"
   },
   "repository": {
     "type": "git",
@@ -34,19 +34,15 @@
   },
   "homepage": "https://github.com/warwickgrigg/ezform#readme",
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
-    "@babel/preset-react": "^7.10.1",
+    "@babel/preset-react": "^7.10.4",
     "eslint": "^6.8.0",
-    "lodash": ">=4.17.19",
     "jest": "^26.1.0",
+    "microbundle": "^0.12.3",
+    "react": "^16.13.1",
     "serve": "^11.3.2",
-    "vhtml": "^2.2.0",
-    "react": "^16.13.1"
+    "vhtml": "^2.2.0"
   },
   "peerDependencies": {
     "react": "^16.13.1"
-  },
-  "dependencies": {
-    "microbundle": "^0.12.3"
   }
 }
