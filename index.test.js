@@ -1,9 +1,9 @@
 /* eslint-env jest, browser */
-import ezForm, { fromExtraTerse } from "./index.js";
+import { ezForm, fromExtraTerse, parseFormInputs } from "./index.js";
 import h from "vhtml";
 /* @jsx h */
 
-const { Field, Form, parseFormInputs } = ezForm(h);
+const { Field, Form } = ezForm(h);
 
 beforeEach(() => {
   // setup a DOM element as a render target
@@ -304,27 +304,61 @@ Object.entries(tests).map(([name, { field, result }]) =>
   test(name, () => expect(Field(fromExtraTerse(field))).toBe(result))
 );
 
+const expectedFormMarkupOrig = (
+  <form>
+    <div class="form-group" key="simple_text_input">
+      <label for="simple_text_input">Simple text input</label>
+      <input
+        type="text"
+        name="simple_text_input"
+        id="simple_text_input"
+        placeholder="Simple text input"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group" key="submit">
+      <button name="submit" type="submit" class="btn btn-primary">
+        Submit
+      </button>
+    </div>
+  </form>
+);
+
+const expectedFormMarkup = (
+  <form>
+    <div class="form-group" key="simple_text_input">
+      <label for="simple_text_input">Simple text input</label>
+      <input
+        type="text"
+        name="simple_text_input"
+        id="simple_text_input"
+        placeholder="Simple text input"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group" key="submit">
+      <input
+        type="submit"
+        name="submit"
+        id="submit"
+        placeholder="Submit"
+        class="btn btn-primary"
+        value="Submit"
+      />
+    </div>
+  </form>
+);
+
 (({ field }) =>
   test("Form markup", () =>
-    expect(Form({ children: [Field(fromExtraTerse(field))] })).toBe(
-      <form>
-        <div class="form-group" key="simple_text_input">
-          <label for="simple_text_input">Simple text input</label>
-          <input
-            type="text"
-            name="simple_text_input"
-            id="simple_text_input"
-            placeholder="Simple text input"
-            class="form-control"
-          />
-        </div>
-        <div class="form-group" key="submit">
-          <button name="submit" type="submit" class="btn btn-primary">
-            Submit
-          </button>
-        </div>
-      </form>
-    )))(tests["Simple text input"]);
+    expect(
+      Form({
+        children: [
+          Field(fromExtraTerse(field)),
+          Field(fromExtraTerse("Submit")),
+        ],
+      })
+    ).toBe(expectedFormMarkup)))(tests["Simple text input"]);
 
 test("Form submission", (done) => {
   const fieldNames = [
@@ -339,7 +373,7 @@ test("Form submission", (done) => {
   //const results = fieldNames.map(({ result }) => result);
   const f = Form({
     //onSubmit: (inputs) => console.log({ inputs }),
-    children,
+    children: [...children, Field(fromExtraTerse("Submit"))],
   });
   document.body.innerHTML = f;
   const form = document.querySelector("form");
@@ -356,7 +390,7 @@ test("Form submission", (done) => {
     });
     done();
   });
-  const button = document.querySelector("button");
+  const button = document.querySelector("#submit");
   button.dispatchEvent(new window.MouseEvent("click"));
 });
 

@@ -4,14 +4,16 @@
   "description": "easy form",
   "source": "index.js",
   "main": "dist/index.js",
-  "module": "dist/index.modern.js",
+  "module": "dist/index.module.js",
+  "umd:main": "dist/index.umd.js",
+  "esmodule": "dist/index.modern.js",
   "files": [
     "dist/"
   ],
   "type": "module",
   "scripts": {
-    "build": "microbundle -f modern --css-modules false --jsx React.createElement",
-    "dev": "microbundle -f modern --css-modules false --jsx React.createElement watch",
+    "build": "microbundle --css-modules false",
+    "dev": "microbundle --css-modules false watch",
     "test": "jest",
     "coverage": "jest --coverage",
     "demo": "cp index.js public/; serve public"
