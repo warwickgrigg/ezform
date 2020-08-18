@@ -115,6 +115,23 @@ const ezForm = (h, { idPrefix = "" } = {}) => {
     return FormGroup({ key, children });
   };
 
+  /**
+   * High level user input field inc optional label, multiple options etc
+   *
+   * @param {Object} f field proerties
+   * @param {Object} [f.ezState] container for properties for intermediate values
+   * @param {string} [f.ezTitle] meaningful title for field
+   * @param {string} [f.type] html input type plus "select-multiple"
+   * @param {string[]} [f.options] options for checkbox, radio, select and select-multiple types
+   * @param {string} [f.label = f.ezTitle] label element
+   * @param {string} [f.placeholder = f.ezTitle] placeholder property
+   * @param {string} [f.name] name property - defaults to ezTitle or placeholder snake-cased
+   * @param {Object} [f] remaining field properties
+   * @returns {Object} vnode with optional label
+   *
+   * @example Field({placeholder: email})
+   *
+   */
   const Field = ({
     ezTitle,
     ezState,
@@ -136,6 +153,18 @@ const ezForm = (h, { idPrefix = "" } = {}) => {
       return Text({ label, key, id, name, placeholder, className, ...props });
     }
   };
+
+  /**
+   * This is a function.
+   *
+   * @param {function} onSubmit callback
+   * @return {string} A good string
+   *
+   * @example
+   *
+   *     <Form onSubmit={({email}) => console.log({email})}>
+   *        <Field
+   */
 
   const Form = ({ onSubmit, children, ...props }) => {
     if (onSubmit)
