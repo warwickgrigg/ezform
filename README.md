@@ -2,6 +2,7 @@
 
 ##Example use
 
+```
 import React from "react";
 import ReactDOM from "react-dom";
 import {ezForm, parseFormInputs, fromExtraTerse} from "ezform";
@@ -37,3 +38,4 @@ children: [
 .map((f, i) => Field({ ...f, key: i })),
 });
 ReactDOM.render(f, document.getElementById("react"));
+```
