@@ -12,8 +12,8 @@
   ],
   "type": "module",
   "scripts": {
-    "build": "microbundle --css-modules false",
-    "dev": "microbundle --css-modules false watch",
+    "build": "microbundle --css-modules false --globals react=React ",
+    "dev": "microbundle --css-modules false --globals react watch",
     "doc": "jsdoc src/ezform.js & serve -p 5001 out",
     "test": "jest",
     "coverage": "jest --coverage",
