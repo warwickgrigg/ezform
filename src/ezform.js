@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+//import { useState } from "react";
 const h = React.createElement;
 const iClass = "custom-control-input";
 const lClass = "custom-control-label";
@@ -27,7 +28,7 @@ const omit = (fields) => (obj) =>
     Object.entries(obj).filter(([key]) => !fields.includes(key))
   );
 
-const fromExtraTerse = (field) => {
+const expandShorthand = (field) => {
   let f = field;
   if (typeof f === "string") return { ezTitle: f };
   if (Array.isArray(f)) f = { ezTitle: f[0], children: f[1] };
@@ -49,8 +50,7 @@ const fromExtraTerse = (field) => {
  */
 
 /** @type {SharedLib.PriorityQueueFactory} */
-//const ezForm = (h, { idPrefix = "" } = {}) => {
-//const idP = idPrefix;
+
 const FormGroup = ({ children, ...props }) =>
   h("div", { className: gClass, ...props }, ...children);
 
@@ -102,15 +102,7 @@ const Text = ({ name, type = inferType(name), key, label, ...props }) => {
   //type = type || inferType(name);
   const children =
     type === "submit"
-      ? [
-          h("input", {
-            type,
-            name,
-            ...props,
-            value: label,
-            className: bClass,
-          }),
-        ]
+      ? [h("input", { type, name, ...props, value: label, className: bClass })]
       : [
           label && h("label", { htmlFor: props.id }, label),
           type === "textarea"
@@ -124,7 +116,7 @@ const Text = ({ name, type = inferType(name), key, label, ...props }) => {
  * High level user input field inc optional label, multiple options etc
  * @function ezField~Field
  * @param {Object} f field proerties
- * @param {Object} [f.ezState] container for properties for intermediate values
+ * @param {Object} [f._state] container for properties for intermediate values
  * @param {string} [f.ezTitle] meaningful title for field
  * @param {string} [f.type] html input type plus "select-multiple"
  * @param {string[]} [f.options] options for checkbox, radio, select and select-multiple types
@@ -138,7 +130,7 @@ const Text = ({ name, type = inferType(name), key, label, ...props }) => {
  */
 const Field = ({
   ezTitle,
-  ezState,
+  _state,
   label = ezTitle,
   placeholder = ezTitle,
   name = (ezTitle || placeholder).replace(/ /g, "_").toLowerCase(),
@@ -148,7 +140,7 @@ const Field = ({
   children,
   ...props
 }) => {
-  if (ezState && !props.value) props.value = ezState[name] || "";
+  if (_state && !props.value) props.value = _state[name] || "";
   const className = cClass;
   const derivedProps = { ...props, label, key, id, name, idP };
   if (children) {
@@ -172,23 +164,26 @@ const Field = ({
  */
 
 const Form = ({ onSubmit, ...props }) => {
+  /*
   const [values, setValues] = useState({});
-  const onChange = ({ target: { name, value } }) => (values) => {
-    console.log({ name, value });
-    return { ...values, [name]: value };
-  };
-  const clonEl = React.cloneElement;
-  const style = { background: "red" };
-  //const withOnChange = (e) => clonEl(e, { onChange, style });
-  const withValue = (e) => clonEl(e, { value: values. });
+  const onChange = ({ target: { name, value } }) =>
+    setValues((values) => {
+      console.log({ name, value });
+      return { ...values, [name]: value };
+    });
+  const withState = (e) => React.cloneElement(e, { _state: values });
+  */
   if (onSubmit)
     props.onSubmit = (e) => {
       e.preventDefault();
       onSubmit(parseFormInputs(e.target));
     };
 
-  return h("form", { ...props, onChange });
-  //children: children.map(withOnChange),
+  return h("form", props);
+
+  /*
+  return h("form", { ...props, onChange, children: props.children.map(withState) });
+  */
 };
 
-export { Field, Form, fromExtraTerse, parseFormInputs };
+export { Field, Form, expandShorthand, parseFormInputs };

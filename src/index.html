@@ -45,16 +45,16 @@
       const f = Form({
         onSubmit: (inputs) => console.log({ inputs }),
         children: [
-          { ezTitle: "Text input with value", value: "text value" },
-          { ezTitle: "Textarea", rows: 5, value: "this is value data" },
+          { ezTitle: "Text input with value" },
+          { ezTitle: "Textarea", rows: 5, defaultValue: "this is value data" },
           {
             ezTitle: "Checkboxes",
-            children: [{ label: "Apple", checked: true }, { label: "Pear" }],
+            children: [{ label: "Apple", defaultChecked: true }, { label: "Pear" }],
           },
           {
             ezTitle: "Radios",
             type: "radio",
-            children: [{ label: "Apple", checked: true }, { label: "Pear" }],
+            children: [{ label: "Apple", defaultChecked: true }, { label: "Pear" }],
           },
           {
             type: "select",
@@ -75,7 +75,10 @@
       */
     </script>
     <script type="module-shim">
-      import "/demo.js"
+      import React from "react";
+      import ReactDOM from "react-dom";
+      import App from "/demo.js";
+      ReactDOM.render(App, document.getElementById("react"));
     </script>
   </head>
   <body>
