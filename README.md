@@ -39,7 +39,7 @@ let f = Form({
 ReactDOM.render(f, document.getElementById("react"));
 ```
 
-##API
+## API
 
 ezForm - factory function returning {Field, Form}
 
