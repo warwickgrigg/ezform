@@ -42,5 +42,7 @@ ReactDOM.render(f, document.getElementById("react"));
 ##API
 
 ezForm - factory function returning {Field, Form}
-Form({onSubmit, children, ...props}) - component, returns form warapping children  
+
+Form({onSubmit, children, ...props}) - component, returns form warapping children
+
 Field({ezTitle, ...props} - component, returns element containing form group (eg div with label and input)
