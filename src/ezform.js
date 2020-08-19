@@ -39,8 +39,14 @@ const fromExtraTerse = (field) => {
   return f;
 };
 
-// ezForm factory export for testing and backwards compatibility
+/**
+ * @typedef ezFormFactory
+ * @function
+ * @param {function} h createElement function (eg. React.createElement)
+ * @return {{Form: function(Object): Array<Array<T>| T>, push: function(Array<T>, T): Array<T>}} an object containing the functions to manage the queue
+ */
 
+/** @type {SharedLib.PriorityQueueFactory} */
 const ezForm = (h, { idPrefix = "" } = {}) => {
   const idP = idPrefix;
   const FormGroup = ({ children, ...props }) =>
@@ -92,7 +98,7 @@ const ezForm = (h, { idPrefix = "" } = {}) => {
     const types = ["number", "email", "textarea", "submit"];
     return types.find((v) => name.includes(v)) || "text";
   };
-
+  /** This is a description of the Text function. */
   const Text = ({ name, type = inferType(name), key, label, ...props }) => {
     //type = type || inferType(name);
     const children =
@@ -117,7 +123,7 @@ const ezForm = (h, { idPrefix = "" } = {}) => {
 
   /**
    * High level user input field inc optional label, multiple options etc
-   *
+   * @function ezField~Field
    * @param {Object} f field proerties
    * @param {Object} [f.ezState] container for properties for intermediate values
    * @param {string} [f.ezTitle] meaningful title for field
@@ -126,8 +132,7 @@ const ezForm = (h, { idPrefix = "" } = {}) => {
    * @param {string} [f.label = f.ezTitle] label element
    * @param {string} [f.placeholder = f.ezTitle] placeholder property
    * @param {string} [f.name] name property - defaults to ezTitle or placeholder snake-cased
-   * @param {Object} [f] remaining field properties
-   * @returns {Object} vnode with optional label
+   * @return {Object} vnode with optional label
    *
    * @example Field({placeholder: email})
    *
@@ -155,8 +160,7 @@ const ezForm = (h, { idPrefix = "" } = {}) => {
   };
 
   /**
-   * This is a function.
-   *
+   * Creates form element
    * @param {function} onSubmit callback
    * @return {string} A good string
    *

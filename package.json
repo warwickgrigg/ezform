@@ -14,9 +14,11 @@
   "scripts": {
     "build": "microbundle --css-modules false",
     "dev": "microbundle --css-modules false watch",
+    "doc": "jsdoc src/ezform.js & serve -p 5001 out",
     "test": "jest",
     "coverage": "jest --coverage",
-    "start": "serve src"
+    "start": "serve src",
+    "demo": "npm rum start"
   },
   "repository": {
     "type": "git",
@@ -44,5 +46,6 @@
   },
   "peerDependencies": {
     "react": "^16.13.1"
-  }
+  },
+  "dependencies": {}
 }
