@@ -1,11 +1,11 @@
-# ezform
+# ezform - terse forms for React and other vdom
 
-## Example use
+## Example
 
 ```
 import React from "react";
 import ReactDOM from "react-dom";
-import {ezForm, parseFormInputs, fromExtraTerse} from "ezform";
+import {ezForm} from "ezform";
 const h = React.createElement;
 const { Field, Form } = ezForm(h, {idPrefix: "r-"});
 let f = Form({
@@ -34,8 +34,13 @@ let f = Form({
     },
     {ezTitle:"Submit"}
   ]
-    //.map(fromExtraTerse)
-    .map((f, i) => Field({ ...f, key: i })),
+  .map((f, i) => Field({ ...f, key: i })),
 });
 ReactDOM.render(f, document.getElementById("react"));
 ```
+
+##API
+
+ezForm - factory function returning {Field, Form}
+Form({onSubmit, children, ...props}) - component, returns form warapping children  
+Field({ezTitle, ...props} - component, returns element containing form group (eg div with label and input)
