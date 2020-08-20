@@ -151,18 +151,16 @@ const Field = ({
 
 /**
  * Creates form element
- * @param {function} onSubmit callback
- * @return {string} A good string
+ * @param {Object} f Form properties
+ * @param {function} [f.onSubmit] callback; will receive object containing values entered
+ * @param {function} [f....props] form properties/attributes
+ * @return {Object} vnode
  *
  * @example
  *
  *     <Form onSubmit={({email}) => console.log({email})}>
- *        Field({placeholder: "email"})
- *
- * @example
- *
- *     Form({onSubmit={({email}) => console.log({email})}}, Field({placeholder: "email"})
- *
+ *        <Field placeholder="email"> </Field>
+ *     <Form>
  */
 
 const Form = ({ onSubmit, children, ...props }) => {
