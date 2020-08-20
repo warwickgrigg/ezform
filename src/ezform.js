@@ -1,3 +1,5 @@
+/** @module ezform */
+
 import React from "react";
 //import { useState } from "react";
 const h = React.createElement;
@@ -7,42 +9,12 @@ const gClass = "form-group";
 const cClass = "form-control";
 const bClass = "btn btn-primary";
 
-const parseFormInputs = ({ elements }) => {
-  const result = {};
-  for (const { type, name, checked, selectedOptions, value } of elements) {
-    if (type === "select-multiple") {
-      result[name] = [];
-      for (const { value } of selectedOptions) result[name].push(value);
-    } else if (type === "checkbox") {
-      if (!result[name]) result[name] = [];
-      if (checked) result[name].push(value);
-    } else if (type !== "submit" && (!(type === "radio") || checked)) {
-      result[name] = value;
-    }
-  }
-  return result;
-};
-
 /*
 const omit = (fields) => (obj) =>
   Object.fromEntries(
     Object.entries(obj).filter(([key]) => !fields.includes(key))
   );
 */
-
-const expandShorthand = (field) => {
-  let f = field;
-  if (typeof f === "string") return { ezTitle: f };
-  if (Array.isArray(f)) f = { ezTitle: f[0], options: f[1] };
-  if (Array.isArray(f.options))
-    return {
-      ...f,
-      options: f.options.map((option) =>
-        typeof option === "string" ? { label: option } : option
-      ),
-    };
-  return f;
-};
 
 const FormGroup = ({ children, ...props }) =>
   h("div", { className: gClass, ...props }, ...children);
@@ -152,7 +124,8 @@ const Field = ({
 /**
  * Creates form element
  * @param {Object} f Form properties
- * @param {function} [f.onSubmit] callback; will receive object containing values entered
+ * @param {function} [f.onSubmit] callback will receive object containing values entered after submit suppressed
+ * @param {function} [f.children] child elements (as in React for example)
  * @param {function} [f....props] form properties/attributes
  * @return {Object} vnode
  *
@@ -184,6 +157,66 @@ const Form = ({ onSubmit, children, ...props }) => {
   /*
   return h("form", { ...props, onChange, children: props.children.map(withState) });
   */
+};
+
+/** Expand field definition from shorthand: simple string, or array
+ *
+ * @param {string|array|Object} field shorthand field definition
+ * @return {Object} field definition as an argument for Field()
+ *
+ */
+const expandShorthand = (field) => {
+  let f = field;
+  if (typeof f === "string") return { ezTitle: f };
+  if (Array.isArray(f)) f = { ezTitle: f[0], options: f[1] };
+  if (Array.isArray(f.options))
+    return {
+      ...f,
+      options: f.options.map((option) =>
+        typeof option === "string" ? { label: option } : option
+      ),
+    };
+  return f;
+};
+
+/** Parse form values, eg for onSubmit. Exposed for testing purposes.
+ *
+ * @param {Object} elements event.target
+ * @return {Object} event target values in a convenient form
+ *
+ * @example
+ *
+ * example return value:
+ *
+ * {
+ *  "inputs": {
+ *   "text_input_with_value": "quick brown fox",
+ *   "textarea": "quick brown fox jumped.\nYes he did.\n",
+ *   "checkboxes": [
+ *     "Apple"
+ *   ],
+ *   "radios": "Pear",
+ *   "select_fruit": [
+ *     "apple",
+ *     "Pear"
+ *   ]
+ *  }
+ * }
+ */
+const parseFormInputs = ({ elements }) => {
+  const result = {};
+  for (const { type, name, checked, selectedOptions, value } of elements) {
+    if (type === "select-multiple") {
+      result[name] = [];
+      for (const { value } of selectedOptions) result[name].push(value);
+    } else if (type === "checkbox") {
+      if (!result[name]) result[name] = [];
+      if (checked) result[name].push(value);
+    } else if (type !== "submit" && (!(type === "radio") || checked)) {
+      result[name] = value;
+    }
+  }
+  return result;
 };
 
 export { Field, Form, expandShorthand, parseFormInputs };

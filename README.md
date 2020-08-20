@@ -1,6 +1,8 @@
-# ezform - terse forms for React and other vdom
+# ezform - Minimal forms layer for React and other vdom, in less than 1Mb
 
-## Example
+## Example code
+
+See src/index.html and src/App.js
 
 ```
 import React from "react";
@@ -36,6 +38,25 @@ const App = React.createElement(Form, {
     .map((f, i) => Field({ ...f, key: i })),
 });
 ReactDOM.render(App, document.getElementById("react"));
+```
+
+## Example onSubmit console output after update
+
+```
+{
+  "inputs": {
+   "text_input_with_value": "quick brown fox",
+   "textarea": "quick brown fox jumped.\nYes he did.\n",
+   "checkboxes": [
+     "Apple"
+   ],
+   "radios": "Pear",
+   "select_fruit": [
+     "apple",
+     "Pear"
+   ]
+  }
+}
 ```
 
 ## API
