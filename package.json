@@ -15,8 +15,8 @@
     "build": "microbundle --css-modules false --globals react=React ",
     "dev": "microbundle --css-modules false --globals react watch",
     "doc": "jsdoc src/ezform.js & serve -p 5001 out",
-    "test": "jest",
-    "coverage": "jest --coverage",
+    "test": "npm run build; jest",
+    "coverage": "npm run build; jest --coverage",
     "start": "serve src",
     "demo": "npm rum start"
   },
@@ -36,16 +36,15 @@
   },
   "homepage": "https://github.com/warwickgrigg/ezform#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "eslint": "^6.8.0",
     "jest": "^26.1.0",
     "microbundle": "^0.12.3",
-    "react": "^16.13.1",
     "serve": "^11.3.2",
     "vhtml": "^2.2.0"
   },
-  "peerDependencies": {
-    "react": "^16.13.1"
-  },
-  "dependencies": {}
+  "dependencies": {
+    "react": "file:vhtml-react"
+  }
 }

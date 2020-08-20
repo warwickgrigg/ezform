@@ -5,42 +5,39 @@
 ```
 import React from "react";
 import ReactDOM from "react-dom";
-import {ezForm} from "ezform";
-const h = React.createElement;
-const { Field, Form } = ezForm(h, {idPrefix: "r-"});
-let f = Form({
+import { Field, Form } from "ezform";
+
+const App = React.createElement(Form, {
   onSubmit: (inputs) => console.log(JSON.stringify({ inputs }, null, 2)),
   children: [
-    { ezTitle: "Text input with value", value: "text value" },
+    { ezTitle: "Text input with value", defaultValue: "xxx" },
     { placeholder: "Textarea", rows: 5 },
     {
       ezTitle: "Checkboxes",
-      children: [{ label: "Apple", checked: true }, { label: "Pear" }],
+      options: [{ label: "Apple", defaultChecked: true }, { label: "Pear" }],
     },
     {
       ezTitle: "Radios",
       type: "radio",
-      children: [{ label: "Apple"}, { label: "Pear", checked: true  }],
+      options: [{ label: "Apple" }, { label: "Pear", defaultChecked: true }],
     },
     {
       type: "select",
       ezTitle: "Select fruit",
       multiple: true,
-      children: [
-        {label: "Apple", value: "apple" },
-        {label: "Pear"},
-        {label: "Passion fruit"},
+      options: [
+        { label: "Apple", value: "apple" },
+        { label: "Pear" },
+        { label: "Passion fruit" },
       ],
     },
-    {ezTitle:"Submit"}
+    { ezTitle: "Submit" },
   ]
-  .map((f, i) => Field({ ...f, key: i })),
+    .map((f, i) => Field({ ...f, key: i })),
 });
-ReactDOM.render(f, document.getElementById("react"));
+ReactDOM.render(App, document.getElementById("react"));
 ```
 
 ## API
 
-Form({onSubmit, children, ...props}) - component, returns form wrapping children
-
-Field({ezTitle, ...props} - component, returns element containing form group (eg div with label and input)
+See source code for jsdoc comments and "out" directory for jsdoc output

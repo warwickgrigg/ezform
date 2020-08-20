@@ -1,9 +1,12 @@
 /* eslint-env jest, browser */
-import { ezForm, fromExtraTerse, parseFormInputs } from "./index.js";
+import {
+  Form,
+  Field,
+  expandShorthand,
+  parseFormInputs,
+} from "../dist/ezform.js";
 import h from "vhtml";
 /* @jsx h */
-
-const { Field, Form } = ezForm(h);
 
 beforeEach(() => {
   // setup a DOM element as a render target
@@ -38,33 +41,32 @@ const tests = {
   },
   Textarea: {
     name: "Textarea",
-    field: { ezTitle: "Textarea", rows: 5, value: "this is value data" },
+    field: { ezTitle: "Textarea", rows: 5, defaultValue: "this is value data" },
     result: (
       <div class="form-group" key="textarea">
         <label for="textarea">Textarea</label>
         <textarea
           name="textarea"
+          rows="5"
+          defaultValue="this is value data"
           id="textarea"
           placeholder="Textarea"
           class="form-control"
-          rows="5"
-        >
-          this is value data
-        </textarea>
+        ></textarea>
       </div>
     ),
   },
   "Text input with value": {
     name: "Text input with value", // named with no label
-    field: { name: "Text input with value", value: "text value" },
+    field: { name: "Text input with value", defaultValue: "text value" },
     result: (
       <div class="form-group" key="Text input with value">
         <input
           type="text"
           name="Text input with value"
+          defaultValue="text value"
           id="Text input with value"
           class="form-control"
-          value="text value"
         />
       </div>
     ),
@@ -78,10 +80,10 @@ const tests = {
         <input
           type="text"
           name="required_input"
+          required="true"
           id="required_input"
           placeholder="Required input"
           class="form-control"
-          required="true"
         />
       </div>
     ),
@@ -95,10 +97,10 @@ const tests = {
         <input
           type="email"
           name="required_email"
+          required="true"
           id="required_email"
           placeholder="Required email"
           class="form-control"
-          required="true"
         />
       </div>
     ),
@@ -112,10 +114,10 @@ const tests = {
         <input
           type="number"
           name="required_number"
+          required="true"
           id="required_number"
           placeholder="Required number"
           class="form-control"
-          required="true"
         />
       </div>
     ),
@@ -139,7 +141,11 @@ const tests = {
     name: "Checkboxes",
     field: {
       ezTitle: "Checkboxes",
-      children: [{ label: "Apple", checked: true }, "Pear", "Passion fruit"],
+      options: [
+        { label: "Apple", defaultChecked: true },
+        "Pear",
+        "Passion fruit",
+      ],
     },
     result: (
       <div class="form-group" key="checkboxes">
@@ -155,7 +161,7 @@ const tests = {
               class="custom-control-input"
               type="checkbox"
               value="Apple"
-              checked="true"
+              defaultChecked="true"
             />
             <label for="checkboxes_0" class="custom-control-label">
               Apple
@@ -200,7 +206,11 @@ const tests = {
     field: {
       ezTitle: "Radio button choices",
       type: "radio",
-      children: ["Apple", { label: "Pear", checked: true }, "Passion fruit"],
+      options: [
+        "Apple",
+        { label: "Pear", defaultChecked: true },
+        "Passion fruit",
+      ],
     },
     result: (
       <div class="form-group" key="radio_button_choices">
@@ -231,7 +241,7 @@ const tests = {
               class="custom-control-input"
               type="radio"
               value="Pear"
-              checked="true"
+              defaultChecked="true"
             />
             <label for="radio_button_choices_1" class="custom-control-label">
               Pear
@@ -262,8 +272,8 @@ const tests = {
       type: "select",
       name: "Select fruit",
       multiple: true,
-      children: [
-        { label: "Apple", value: "apple", selected: true },
+      options: [
+        { label: "Apple", value: "apple", defaultSelected: true },
         "Pear",
         "Passion fruit",
       ],
@@ -272,15 +282,15 @@ const tests = {
       <div class="form-group" key="Select fruit">
         <select
           name="Select fruit"
+          multiple="true"
           id="Select fruit"
           class="form-control"
-          multiple="true"
         >
           <option
             id="Select fruit_0"
             key="Select fruit_0"
             value="apple"
-            selected="true"
+            defaultSelected="true"
           >
             Apple
           </option>
@@ -301,7 +311,7 @@ const tests = {
 };
 
 Object.entries(tests).map(([name, { field, result }]) =>
-  test(name, () => expect(Field(fromExtraTerse(field))).toBe(result))
+  test(name, () => expect(Field(expandShorthand(field))).toBe(result))
 );
 
 const expectedFormMarkupOrig = (
@@ -354,12 +364,25 @@ const expectedFormMarkup = (
     expect(
       Form({
         children: [
-          Field(fromExtraTerse(field)),
-          Field(fromExtraTerse("Submit")),
+          Field(expandShorthand(field)),
+          Field(expandShorthand("Submit")),
         ],
       })
     ).toBe(expectedFormMarkup)))(tests["Simple text input"]);
 
+const defaultToReal = (o) =>
+  Object.fromEntries(
+    Object.entries(o).map(([k, v]) => [
+      k === "defaultValue"
+        ? "value"
+        : k === "defaultChecked"
+        ? "checked"
+        : k === "defaultSelected"
+        ? "selected"
+        : k,
+      Array.isArray(v) ? v.map(defaultToReal) : v,
+    ])
+  );
 test("Form submission", (done) => {
   const fieldNames = [
     "Text input with value",
@@ -369,11 +392,13 @@ test("Form submission", (done) => {
   ];
   const children = fieldNames
     .map((n) => tests[n])
-    .map(({ field }) => Field(fromExtraTerse(field)));
+    .map(({ field }) => expandShorthand(field))
+    .map(defaultToReal)
+    .map(Field);
   //const results = fieldNames.map(({ result }) => result);
   const f = Form({
     //onSubmit: (inputs) => console.log({ inputs }),
-    children: [...children, Field(fromExtraTerse("Submit"))],
+    children: [...children, Field(expandShorthand("Submit"))],
   });
   document.body.innerHTML = f;
   const form = document.querySelector("form");
