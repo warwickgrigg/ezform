@@ -1,4 +1,4 @@
-# ezform - Minimal forms layer for React etc, in less than 1Kb
+# ezform - Minimal forms layer for React etc; <1Kb
 
 ## Minimal example
 
