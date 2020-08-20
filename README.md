@@ -1,5 +1,16 @@
 # ezform - Minimal forms layer for React and other vdom, in less than 1Mb
 
+## Minimal example
+
+```
+  import { Field, Form } from "ezform";
+  const App = () => (
+    <Form onSubmit={({email}) => console.log({email})}>
+      <Field placeholder="email"> </Field>
+    <Form>
+  )
+```
+
 ## Example code
 
 See src/index.html and src/App.js
