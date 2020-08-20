@@ -73,3 +73,16 @@ ReactDOM.render(App, document.getElementById("react"));
 ## API
 
 See source code for jsdoc comments and "out" directory for jsdoc output
+
+## Sizes
+
+```
+  1812 B: ezform.js.gz
+  1583 B: ezform.js.br
+  1007 B: ezform.modern.js.gz
+  884 B: ezform.modern.js.br
+  1798 B: ezform.module.js.gz
+  1572 B: ezform.module.js.br
+  1876 B: ezform.umd.js.gz
+  1649 B: ezform.umd.js.br
+```
