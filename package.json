@@ -18,7 +18,8 @@
     "test": "npm run build; jest",
     "coverage": "npm run build; jest --coverage",
     "start": "serve src",
-    "demo": "npm rum start"
+    "demo": "npm rum start",
+    "pre-deploy": "cp src/index.html docs/demo.html; cp src/app.js src/ezform.js docs/"
   },
   "repository": {
     "type": "git",
