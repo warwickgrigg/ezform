@@ -55,6 +55,21 @@ ReactDOM.render(App, document.getElementById("react"));
 
 (https://warwickgrigg.github.io/ezform/demo)
 
+## CSS
+
+Use ezForm's minimal styling (ezform.css as used in the example demo), Bootstrap 4, or roll your own.
+
+ezform applies the following styles:
+
+```
+const gClass = "form-group"; // div container
+const bClass = "btn btn-primary"; // input[type="submit]
+const cClass = "form-control"; // input, select, textarea
+const checkClass = "form-check form-check-inline"; // div container for each checkbox and radio option
+const checkiClass = "form-check-input";
+const checklClass = "form-check-label";
+```
+
 ## Example's console output after updates and clicking Submit
 
 ```
