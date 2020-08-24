@@ -51,7 +51,16 @@ const App = React.createElement(Form, {
 ReactDOM.render(App, document.getElementById("react"));
 ```
 
-## Example onSubmit console output after update
+## Example code rendering
+
+<iframe id="Example"
+    title="Example"
+    width="400"
+    height="600"
+    src="https://https://warwickgrigg.github.io/ezform/demo">
+</iframe>
+
+## Example's console output after updates and clicking Submit
 
 ```
 {
