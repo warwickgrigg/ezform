@@ -1,6 +1,6 @@
 {
   "name": "ezform",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "easy form",
   "source": "src/ezform.js",
   "main": "dist/ezform.js",
