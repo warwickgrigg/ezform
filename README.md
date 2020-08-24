@@ -94,6 +94,12 @@ const checklClass = "form-check-label";
 }
 ```
 
+## React controlled form inputs
+
+By default Form and its children are uncontrolled: the DOM stores the state, then delivered on Submit.
+
+Controlled form inputs are on our roadmap.
+
 ## API
 
 (https://warwickgrigg.github.io/ezform/jsdoc)
