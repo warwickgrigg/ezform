@@ -151,49 +151,40 @@ const tests = {
       <div class="form-group" key="checkboxes">
         <label>Checkboxes</label>
         <div>
-          <div
-            class="custom-control custom-checkbox custom-control-inline"
-            key="checkboxes_0"
-          >
+          <div class="form-check form-check-inline" key="checkboxes_0">
             <input
               id="checkboxes_0"
               name="checkboxes"
-              class="custom-control-input"
+              class="form-check-input"
               type="checkbox"
               value="Apple"
               defaultChecked="true"
             />
-            <label for="checkboxes_0" class="custom-control-label">
+            <label for="checkboxes_0" class="form-check-label">
               Apple
             </label>
           </div>
-          <div
-            class="custom-control custom-checkbox custom-control-inline"
-            key="checkboxes_1"
-          >
+          <div class="form-check form-check-inline" key="checkboxes_1">
             <input
               id="checkboxes_1"
               name="checkboxes"
-              class="custom-control-input"
+              class="form-check-input"
               type="checkbox"
               value="Pear"
             />
-            <label for="checkboxes_1" class="custom-control-label">
+            <label for="checkboxes_1" class="form-check-label">
               Pear
             </label>
           </div>
-          <div
-            class="custom-control custom-checkbox custom-control-inline"
-            key="checkboxes_2"
-          >
+          <div class="form-check form-check-inline" key="checkboxes_2">
             <input
               id="checkboxes_2"
               name="checkboxes"
-              class="custom-control-input"
+              class="form-check-input"
               type="checkbox"
               value="Passion fruit"
             />
-            <label for="checkboxes_2" class="custom-control-label">
+            <label for="checkboxes_2" class="form-check-label">
               Passion fruit
             </label>
           </div>
@@ -217,48 +208,48 @@ const tests = {
         <label>Radio button choices</label>
         <div>
           <div
-            class="custom-control custom-radio custom-control-inline"
+            class="form-check form-check-inline"
             key="radio_button_choices_0"
           >
             <input
               id="radio_button_choices_0"
               name="radio_button_choices"
-              class="custom-control-input"
+              class="form-check-input"
               type="radio"
               value="Apple"
             />
-            <label for="radio_button_choices_0" class="custom-control-label">
+            <label for="radio_button_choices_0" class="form-check-label">
               Apple
             </label>
           </div>
           <div
-            class="custom-control custom-radio custom-control-inline"
+            class="form-check form-check-inline"
             key="radio_button_choices_1"
           >
             <input
               id="radio_button_choices_1"
               name="radio_button_choices"
-              class="custom-control-input"
+              class="form-check-input"
               type="radio"
               value="Pear"
               defaultChecked="true"
             />
-            <label for="radio_button_choices_1" class="custom-control-label">
+            <label for="radio_button_choices_1" class="form-check-label">
               Pear
             </label>
           </div>
           <div
-            class="custom-control custom-radio custom-control-inline"
+            class="form-check form-check-inline"
             key="radio_button_choices_2"
           >
             <input
               id="radio_button_choices_2"
               name="radio_button_choices"
-              class="custom-control-input"
+              class="form-check-input"
               type="radio"
               value="Passion fruit"
             />
-            <label for="radio_button_choices_2" class="custom-control-label">
+            <label for="radio_button_choices_2" class="form-check-label">
               Passion fruit
             </label>
           </div>

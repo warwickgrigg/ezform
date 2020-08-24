@@ -14,7 +14,7 @@
   "scripts": {
     "build": "microbundle --css-modules false --globals react=React ",
     "dev": "microbundle --css-modules false --globals react watch",
-    "doc": "jsdoc src/ezform.js & serve -p 5001 out",
+    "doc": "jsdoc -d ./docs/jsdoc src/ezform.js & serve -p 5001 docs/jsdoc",
     "test": "npm run build; jest",
     "coverage": "npm run build; jest --coverage",
     "start": "serve src",

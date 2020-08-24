@@ -1,6 +1,6 @@
 # ezform - Minimal forms layer for React etc in < 1Kb
 
-## Minimal example
+## Minimal example with JSX
 
 ```
   import { Field, Form } from "ezform";
@@ -13,45 +13,50 @@
 
 ## Example code
 
-See src/index.html and src/App.js
+See src/index.html and src/app.js
 
 ```
-import React from "react";
 import ReactDOM from "react-dom";
+import React from "react";
 import { Field, Form } from "ezform";
 
-const App = React.createElement(Form, {
-  onSubmit: (inputs) => console.log(JSON.stringify({ inputs }, null, 2)),
-  children: [
-    { ezTitle: "Text input with value", defaultValue: "xxx" },
-    { placeholder: "Textarea", rows: 5 },
-    {
-      ezTitle: "Checkboxes",
-      options: [{ label: "Apple", defaultChecked: true }, { label: "Pear" }],
-    },
-    {
-      ezTitle: "Radios",
-      type: "radio",
-      options: [{ label: "Apple" }, { label: "Pear", defaultChecked: true }],
-    },
-    {
-      type: "select",
-      ezTitle: "Select fruit",
-      multiple: true,
-      options: [
-        { label: "Apple", value: "apple" },
-        { label: "Pear" },
-        { label: "Passion fruit" },
-      ],
-    },
-    { ezTitle: "Submit" },
-  ]
-    .map((f, i) => Field({ ...f, key: i })),
-});
+const fields = [
+  { ezTitle: "Text input with value", defaultValue: "xxx" },
+  { placeholder: "Textarea", rows: 5 },
+  {
+    ezTitle: "Checkboxes",
+    options: [{ label: "Apple", defaultChecked: true }, { label: "Pear" }],
+  },
+  {
+    ezTitle: "Radios",
+    type: "radio",
+    options: [{ label: "Apple" }, { label: "Pear", defaultChecked: true }],
+  },
+  {
+    type: "select",
+    ezTitle: "Select fruit",
+    multiple: true,
+    options: [
+      { label: "Apple", value: "apple" },
+      { label: "Pear" },
+      { label: "Passion fruit" },
+    ],
+  },
+  { ezTitle: "Submit" },
+];
+
+const onSubmit = (inputs) => console.log(JSON.stringify({ inputs }, null, 2));
+
+const App = React.createElement(
+  Form,
+  { onSubmit },
+  ...fields.map((f, i) => Field({ ...f, key: i }))
+);
+
 ReactDOM.render(App, document.getElementById("react"));
 ```
 
-## Example code rendering
+## Example in action
 
 (https://warwickgrigg.github.io/ezform/demo)
 
@@ -59,7 +64,7 @@ ReactDOM.render(App, document.getElementById("react"));
 
 Use ezForm's minimal styling (ezform.css as used in the example demo), Bootstrap 4, or roll your own.
 
-ezform applies the following styles:
+ezform applies the following CSS classes:
 
 ```
 const gClass = "form-group"; // div container
@@ -70,7 +75,7 @@ const checkiClass = "form-check-input";
 const checklClass = "form-check-label";
 ```
 
-## Example's console output after updates and clicking Submit
+## Example's console output on clicking Submit (after various updates)
 
 ```
 {
@@ -91,7 +96,9 @@ const checklClass = "form-check-label";
 
 ## API
 
-See source code for jsdoc comments and "out" directory for jsdoc output
+(https://warwickgrigg.github.io/ezform/jsdoc)
+
+Also see source code for jsdoc comments and "docs/jsdoc" directory for jsdoc output
 
 ## Sizes
 
