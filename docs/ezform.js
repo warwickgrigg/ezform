@@ -3,11 +3,16 @@
 import React from "react";
 //import { useState } from "react";
 const h = React.createElement;
-const iClass = "custom-control-input";
-const lClass = "custom-control-label";
 const gClass = "form-group";
-const cClass = "form-control";
 const bClass = "btn btn-primary";
+const cClass = "form-control"; // input, select, textarea
+const checkClass = "form-check form-check-inline";
+const checkiClass = "form-check-input";
+const checklClass = "form-check-label";
+//const iClass = "custom-control-input";
+//const lClass = "custom-control-label";
+//const checkClass = "custom-control custom-checkbox custom-control-inline";
+//const radioClass = "custom-control custom-radio custom-control-inline";
 
 /*
 const omit = (fields) => (obj) =>
@@ -20,12 +25,12 @@ const FormGroup = ({ children, ...props }) =>
   h("div", { className: gClass, ...props }, ...children);
 
 const TickBox = ({ type, name, id, label, value = label, ...props }) => {
-  const className = `custom-control custom-${type} custom-control-inline`;
+  //const className = `custom-control custom-${type} custom-control-inline`;
   return h(
     "div",
-    { className, key: id },
-    h("input", { id, name, className: iClass, type, value, ...props }),
-    h("label", { htmlFor: id, className: lClass }, label)
+    { className: checkClass, key: id },
+    h("input", { id, name, className: checkiClass, type, value, ...props }),
+    h("label", { htmlFor: id, className: checklClass }, label)
   );
 };
 
