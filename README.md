@@ -58,7 +58,7 @@ ReactDOM.render(App, document.getElementById("react"));
 
 ## Example in action
 
-(https://warwickgrigg.github.io/ezform/demo)
+(https://warwickgrigg.github.io/ezform)
 
 ## CSS
 
