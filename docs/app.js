@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, Form, parseFormInputs, expandShorthand } from "./ezform";
+import { Field, Form, parseFormInputs, expandShorthand } from "./ezform.js";
 
 const App = React.createElement(Form, {
   onSubmit: (inputs) => console.log(JSON.stringify({ inputs }, null, 2)),
