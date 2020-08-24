@@ -95,7 +95,6 @@ const Text = ({ name, type = inferType(name), key, label, ...props }) => {
  * @param {string} [f.id = f.prefix + f.name] id for input/textarea; number will be suffixed  for options' ids
  * @param {string} [f.type] html input type or "textarea"
  * @param {Object[]} [f.options] array of options' attributes for checkbox, radio and select
- * @param {Object} [f.values] container for a controlled form's input values
  * @param {Object} [f....props] other dom/vdom/react attributes
  * @return {Object} vnode with optional label
  *
@@ -115,10 +114,8 @@ const Field = ({
   id = prefix + name,
   key = id,
   options,
-  values,
   ...props
 }) => {
-  if (values && !props.value) props.value = values[name] || "";
   const className = cClass;
   const commonProps = { ...props, label, key, id, name };
   if (!options) return Text({ ...commonProps, placeholder, className });
@@ -143,15 +140,6 @@ const Field = ({
  */
 
 const Form = ({ onSubmit, children, ...props }) => {
-  /*
-  const [values, setValues] = useState({});
-  const onChange = ({ target: { name, value } }) =>
-    setValues((values) => {
-      //console.log({ name, value });
-      return { ...values, [name]: value };
-    });
-  const withState = (e) => React.cloneElement(e, { values: values });
-  */
   if (onSubmit)
     props.onSubmit = (e) => {
       e.preventDefault();
@@ -159,10 +147,6 @@ const Form = ({ onSubmit, children, ...props }) => {
     };
 
   return h("form", props, ...children);
-
-  /*
-  return h("form", { ...props, onChange, children: props.children.map(withState) });
-  */
 };
 
 /** Expand field definition from shorthand: simple string, or array
