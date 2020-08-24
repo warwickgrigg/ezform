@@ -53,12 +53,7 @@ ReactDOM.render(App, document.getElementById("react"));
 
 ## Example code rendering
 
-<iframe id="Example"
-    title="Example"
-    width="400"
-    height="600"
-    src="https://warwickgrigg.github.io/ezform/demo">
-</iframe>
+(https://warwickgrigg.github.io/ezform/demo)
 
 ## Example's console output after updates and clicking Submit
 
