@@ -2,7 +2,7 @@
 
 import React from "react";
 
-//import { useState } from "react";
+// import { useState } from "react";
 const h = React.createElement;
 const gClass = "form-group";
 const bClass = "btn btn-primary";
@@ -10,10 +10,10 @@ const cClass = "form-control"; // input, select, textarea
 const checkClass = "form-check form-check-inline";
 const checkiClass = "form-check-input";
 const checklClass = "form-check-label";
-//const iClass = "custom-control-input";
-//const lClass = "custom-control-label";
-//const checkClass = "custom-control custom-checkbox custom-control-inline";
-//const radioClass = "custom-control custom-radio custom-control-inline";
+// const iClass = "custom-control-input";
+// const lClass = "custom-control-label";
+// const checkClass = "custom-control custom-checkbox custom-control-inline";
+// const radioClass = "custom-control custom-radio custom-control-inline";
 
 /*
 const omit = (fields) => (obj) =>
@@ -25,20 +25,19 @@ const omit = (fields) => (obj) =>
 const FormGroup = ({ children, ...props }) =>
   h("div", { className: gClass, ...props }, ...children);
 
-const TickBox = ({ type, name, id, label, value = label, ...props }) => {
-  //const className = `custom-control custom-${type} custom-control-inline`;
-  return h(
+const TickBox = ({ type, name, id, label, value = label, ...props }) =>
+  // const className = `custom-control custom-${type} custom-control-inline`;
+  h(
     "div",
     { className: checkClass, key: id },
     h("input", { id, name, className: checkiClass, type, value, ...props }),
     h("label", { htmlFor: id, className: checklClass }, label)
   );
-};
-
 const TickBoxes = ({ type, name, id, key, label, options, ...p }) => {
+  // eslint-disable-next-line no-param-reassign
   type = type || "checkbox";
   const xChildren = options.map((cProps, i) =>
-    TickBox({ type, name, ...p, id: id + "_" + i, ...cProps })
+    TickBox({ type, name, ...p, id: `${id}_${i}`, ...cProps })
   );
 
   return FormGroup({
@@ -48,9 +47,11 @@ const TickBoxes = ({ type, name, id, key, label, options, ...p }) => {
 };
 
 const SelectBox = ({ name, key, label, options, ...props }) => {
+  // eslint-disable-next-line no-param-reassign
   delete props.type;
+  // eslint-disable-next-line no-shadow
   const xChildren = options.map(({ label, value = label, ...cProps }, i) => {
-    const id = props.id + "_" + i;
+    const id = `${props.id}_${i}`;
     return h("option", { id, key: id, value, ...cProps }, label);
   });
 
@@ -64,20 +65,21 @@ const SelectBox = ({ name, key, label, options, ...props }) => {
 };
 
 const inferType = (name) => {
+  // eslint-disable-next-line no-param-reassign
   name = name.toLowerCase();
   const types = ["number", "email", "textarea", "submit"];
   return types.find((v) => name.includes(v)) || "text";
 };
 
 const Text = ({ name, type = inferType(name), key, label, ...props }) => {
-  //type = type || inferType(name);
+  // type = type || inferType(name);
   const children =
     type === "submit"
       ? [h("input", { type, name, ...props, value: label, className: bClass })]
       : [
           label && h("label", { htmlFor: props.id }, label),
           type === "textarea"
-            ? //? h("textarea", { name, ...omit(["value"])(props) }, props.value)
+            ? // ? h("textarea", { name, ...omit(["value"])(props) }, props.value)
               h("textarea", { name, ...props })
             : h("input", { type, name, ...props }),
         ];
@@ -141,8 +143,10 @@ const Field = ({
 
 const Form = ({ onSubmit, children, ...props }) => {
   if (onSubmit)
+    // eslint-disable-next-line no-param-reassign
     props.onSubmit = (e) => {
       e.preventDefault();
+      // eslint-disable-next-line no-use-before-define
       onSubmit(parseFormInputs(e.target));
     };
 
@@ -195,9 +199,11 @@ const expandShorthand = (field) => {
  */
 const parseFormInputs = ({ elements }) => {
   const result = {};
+  // eslint-disable-next-line no-restricted-syntax
   for (const { type, name, checked, selectedOptions, value } of elements) {
     if (type === "select-multiple") {
       result[name] = [];
+      // eslint-disable-next-line no-restricted-syntax, no-shadow
       for (const { value } of selectedOptions) result[name].push(value);
     } else if (type === "checkbox") {
       if (!result[name]) result[name] = [];

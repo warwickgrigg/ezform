@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, Form } from "./ezform.js";
+import { Field, Form } from "./ezform";
 
 const fields = [
   { ezTitle: "Text input with value", defaultValue: "xxx" },
@@ -26,6 +26,7 @@ const fields = [
   { ezTitle: "Submit" },
 ];
 
+// eslint-disable-next-line no-console
 const onSubmit = (inputs) => console.log(JSON.stringify({ inputs }, null, 2));
 
 const App = React.createElement(

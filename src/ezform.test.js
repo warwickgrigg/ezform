@@ -1,25 +1,22 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-env jest, browser */
-import {
-  Form,
-  Field,
-  expandShorthand,
-  parseFormInputs,
-} from "../dist/ezform.js";
+import { Form, Field, expandShorthand, parseFormInputs } from "../dist/ezform";
+// eslint-disable-next-line import/order
 import h from "vhtml";
 /* @jsx h */
 
 beforeEach(() => {
   // setup a DOM element as a render target
-  //container = document.createElement("div");
+  // container = document.createElement("div");
   // container *must* be attached to document so events work correctly.
-  //document.body.appendChild(container);
+  // document.body.appendChild(container);
 });
 
 afterEach(() => {
   // cleanup on exiting
-  //unmountComponentAtNode(container);
-  //container.remove();
-  //container = null;
+  // unmountComponentAtNode(container);
+  // container.remove();
+  // container = null;
 });
 
 const tests = {
@@ -27,13 +24,16 @@ const tests = {
     name: "Simple text input",
     field: "Simple text input",
     result: (
+      // eslint-disable-next-line react/no-unknown-property
       <div class="form-group" key="simple_text_input">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
         <label for="simple_text_input">Simple text input</label>
         <input
           type="text"
           name="simple_text_input"
           id="simple_text_input"
           placeholder="Simple text input"
+          // eslint-disable-next-line react/no-unknown-property
           class="form-control"
         />
       </div>
@@ -43,7 +43,9 @@ const tests = {
     name: "Textarea",
     field: { ezTitle: "Textarea", rows: 5, defaultValue: "this is value data" },
     result: (
+      // eslint-disable-next-line react/no-unknown-property
       <div class="form-group" key="textarea">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
         <label for="textarea">Textarea</label>
         <textarea
           name="textarea"
@@ -51,8 +53,9 @@ const tests = {
           defaultValue="this is value data"
           id="textarea"
           placeholder="Textarea"
+          // eslint-disable-next-line react/no-unknown-property
           class="form-control"
-        ></textarea>
+        />
       </div>
     ),
   },
@@ -60,12 +63,14 @@ const tests = {
     name: "Text input with value", // named with no label
     field: { name: "Text input with value", defaultValue: "text value" },
     result: (
+      // eslint-disable-next-line react/no-unknown-property
       <div class="form-group" key="Text input with value">
         <input
           type="text"
           name="Text input with value"
           defaultValue="text value"
           id="Text input with value"
+          // eslint-disable-next-line react/no-unknown-property
           class="form-control"
         />
       </div>
@@ -75,7 +80,9 @@ const tests = {
     name: "Required input",
     field: { ezTitle: "Required input", required: true },
     result: (
+      // eslint-disable-next-line react/no-unknown-property
       <div class="form-group" key="required_input">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
         <label for="required_input">Required input</label>
         <input
           type="text"
@@ -83,6 +90,7 @@ const tests = {
           required="true"
           id="required_input"
           placeholder="Required input"
+          // eslint-disable-next-line react/no-unknown-property
           class="form-control"
         />
       </div>
@@ -92,7 +100,9 @@ const tests = {
     name: "Required email",
     field: { ezTitle: "Required email", required: true },
     result: (
+      // eslint-disable-next-line react/no-unknown-property
       <div class="form-group" key="required_email">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
         <label for="required_email">Required email</label>
         <input
           type="email"
@@ -100,6 +110,7 @@ const tests = {
           required="true"
           id="required_email"
           placeholder="Required email"
+          // eslint-disable-next-line react/no-unknown-property
           class="form-control"
         />
       </div>
@@ -109,7 +120,9 @@ const tests = {
     name: "Required number",
     field: { ezTitle: "Required number", required: true },
     result: (
+      // eslint-disable-next-line react/no-unknown-property
       <div class="form-group" key="required_number">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
         <label for="required_number">Required number</label>
         <input
           type="number"
@@ -117,6 +130,7 @@ const tests = {
           required="true"
           id="required_number"
           placeholder="Required number"
+          // eslint-disable-next-line react/no-unknown-property
           class="form-control"
         />
       </div>
@@ -126,12 +140,14 @@ const tests = {
     name: "Placeholder without label",
     field: { placeholder: ".. further information" },
     result: (
+      // eslint-disable-next-line react/no-unknown-property
       <div class="form-group" key=".._further_information">
         <input
           type="text"
           name=".._further_information"
           id=".._further_information"
           placeholder=".. further information"
+          // eslint-disable-next-line react/no-unknown-property
           class="form-control"
         />
       </div>
@@ -148,42 +164,54 @@ const tests = {
       ],
     },
     result: (
+      // eslint-disable-next-line react/no-unknown-property
       <div class="form-group" key="checkboxes">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
         <label>Checkboxes</label>
+
         <div>
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
           <div class="form-check form-check-inline" key="checkboxes_0">
             <input
               id="checkboxes_0"
               name="checkboxes"
+              // eslint-disable-next-line react/no-unknown-property
               class="form-check-input"
               type="checkbox"
               value="Apple"
               defaultChecked="true"
             />
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
             <label for="checkboxes_0" class="form-check-label">
               Apple
             </label>
           </div>
+          {/* eslint-disable-next-line react/no-unknown-property */}
           <div class="form-check form-check-inline" key="checkboxes_1">
             <input
               id="checkboxes_1"
               name="checkboxes"
+              // eslint-disable-next-line react/no-unknown-property
               class="form-check-input"
               type="checkbox"
               value="Pear"
             />
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
             <label for="checkboxes_1" class="form-check-label">
               Pear
             </label>
           </div>
+          {/* eslint-disable-next-line react/no-unknown-property */}
           <div class="form-check form-check-inline" key="checkboxes_2">
             <input
               id="checkboxes_2"
               name="checkboxes"
+              // eslint-disable-next-line react/no-unknown-property
               class="form-check-input"
               type="checkbox"
               value="Passion fruit"
             />
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
             <label for="checkboxes_2" class="form-check-label">
               Passion fruit
             </label>
@@ -204,51 +232,62 @@ const tests = {
       ],
     },
     result: (
+      // eslint-disable-next-line react/no-unknown-property
       <div class="form-group" key="radio_button_choices">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
         <label>Radio button choices</label>
         <div>
           <div
+            // eslint-disable-next-line react/no-unknown-property
             class="form-check form-check-inline"
             key="radio_button_choices_0"
           >
             <input
               id="radio_button_choices_0"
               name="radio_button_choices"
+              // eslint-disable-next-line react/no-unknown-property
               class="form-check-input"
               type="radio"
               value="Apple"
             />
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
             <label for="radio_button_choices_0" class="form-check-label">
               Apple
             </label>
           </div>
           <div
+            // eslint-disable-next-line react/no-unknown-property
             class="form-check form-check-inline"
             key="radio_button_choices_1"
           >
             <input
               id="radio_button_choices_1"
               name="radio_button_choices"
+              // eslint-disable-next-line react/no-unknown-property
               class="form-check-input"
               type="radio"
               value="Pear"
               defaultChecked="true"
             />
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
             <label for="radio_button_choices_1" class="form-check-label">
               Pear
             </label>
           </div>
           <div
+            // eslint-disable-next-line react/no-unknown-property
             class="form-check form-check-inline"
             key="radio_button_choices_2"
           >
             <input
               id="radio_button_choices_2"
               name="radio_button_choices"
+              // eslint-disable-next-line react/no-unknown-property
               class="form-check-input"
               type="radio"
               value="Passion fruit"
             />
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
             <label for="radio_button_choices_2" class="form-check-label">
               Passion fruit
             </label>
@@ -270,11 +309,13 @@ const tests = {
       ],
     },
     result: (
+      // eslint-disable-next-line react/no-unknown-property
       <div class="form-group" key="Select fruit">
         <select
           name="Select fruit"
           multiple="true"
           id="Select fruit"
+          // eslint-disable-next-line react/no-unknown-property
           class="form-control"
         >
           <option
@@ -305,19 +346,25 @@ Object.entries(tests).map(([name, { field, result }]) =>
   test(name, () => expect(Field(expandShorthand(field))).toBe(result))
 );
 
+// eslint-disable-next-line no-unused-vars
 const expectedFormMarkupOrig = (
   <form>
+    {/* eslint-disable-next-line react/no-unknown-property */}
     <div class="form-group" key="simple_text_input">
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
       <label for="simple_text_input">Simple text input</label>
       <input
         type="text"
         name="simple_text_input"
         id="simple_text_input"
         placeholder="Simple text input"
+        // eslint-disable-next-line react/no-unknown-property
         class="form-control"
       />
     </div>
+    {/* eslint-disable-next-line react/no-unknown-property */}
     <div class="form-group" key="submit">
+      {/* eslint-disable-next-line react/no-unknown-property */}
       <button name="submit" type="submit" class="btn btn-primary">
         Submit
       </button>
@@ -327,22 +374,27 @@ const expectedFormMarkupOrig = (
 
 const expectedFormMarkup = (
   <form>
+    {/* eslint-disable-next-line react/no-unknown-property */}
     <div class="form-group" key="simple_text_input">
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, react/no-unknown-property */}
       <label for="simple_text_input">Simple text input</label>
       <input
         type="text"
         name="simple_text_input"
         id="simple_text_input"
         placeholder="Simple text input"
+        // eslint-disable-next-line react/no-unknown-property
         class="form-control"
       />
     </div>
+    {/* eslint-disable-next-line react/no-unknown-property */}
     <div class="form-group" key="submit">
       <input
         type="submit"
         name="submit"
         id="submit"
         placeholder="Submit"
+        // eslint-disable-next-line react/no-unknown-property
         class="btn btn-primary"
         value="Submit"
       />
@@ -364,6 +416,7 @@ const expectedFormMarkup = (
 const defaultToReal = (o) =>
   Object.fromEntries(
     Object.entries(o).map(([k, v]) => [
+      // eslint-disable-next-line no-nested-ternary
       k === "defaultValue"
         ? "value"
         : k === "defaultChecked"
@@ -386,9 +439,9 @@ test("Form submission", (done) => {
     .map(({ field }) => expandShorthand(field))
     .map(defaultToReal)
     .map(Field);
-  //const results = fieldNames.map(({ result }) => result);
+  // const results = fieldNames.map(({ result }) => result);
   const f = Form({
-    //onSubmit: (inputs) => console.log({ inputs }),
+    // onSubmit: (inputs) => console.log({ inputs }),
     children: [...children, Field(expandShorthand("Submit"))],
   });
   document.body.innerHTML = f;
@@ -397,7 +450,7 @@ test("Form submission", (done) => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const result = parseFormInputs(event.target);
-    //console.log(JSON.stringify({ result }));
+    // console.log(JSON.stringify({ result }));
     expect(result).toStrictEqual({
       "Text input with value": "text value",
       checkboxes: ["Apple"],
@@ -410,6 +463,6 @@ test("Form submission", (done) => {
   button.dispatchEvent(new window.MouseEvent("click"));
 });
 
-//submit.dispatchEvent(new window.MouseEvent("click"));
+// submit.dispatchEvent(new window.MouseEvent("click"));
 
-//to debug: node --inspect-brk node_modules/.bin/jest --runInBand
+// to debug: node --inspect-brk node_modules/.bin/jest --runInBand
