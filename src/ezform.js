@@ -22,8 +22,13 @@ const omit = (fields) => (obj) =>
   );
 */
 
+/*
+const toChildren = (children) =>
+  Array.isArray(children) ? children : [children];
+*/
+
 const FormGroup = ({ children, ...props }) =>
-  h("div", { className: gClass, ...props }, ...children);
+  h("div", { className: gClass, ...props }, ...[].concat(children));
 
 const TickBox = ({ type, name, id, label, value = label, ...props }) =>
   // const className = `custom-control custom-${type} custom-control-inline`;
@@ -137,7 +142,7 @@ const Field = ({
  * @example
  *
  *     <Form onSubmit={({email}) => console.log({email})}>
- *        <Field placeholder="email"> </Field>
+ *        <Field placeholder="email"/>
  *     <Form>
  */
 
@@ -150,7 +155,7 @@ const Form = ({ onSubmit, children, ...props }) => {
       onSubmit(parseFormInputs(e.target));
     };
 
-  return h("form", props, ...children);
+  return h("form", props, ...[].concat(children));
 };
 
 /** Expand field definition from shorthand: simple string, or array
